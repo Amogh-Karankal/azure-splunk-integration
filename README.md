@@ -12,29 +12,6 @@ This project demonstrates cloud-to-SIEM integration by connecting Microsoft Azur
 
 ### Architecture
 ![Architecture](screenshots/azure-splunk-architecture.png)
-```
-┌─────────────────────┐         ┌─────────────────────┐
-│   Microsoft Azure   │         │  Splunk Enterprise  │
-│                     │         │                     │
-│  ┌───────────────┐  │         │  ┌───────────────┐  │
-│  │   Entra ID    │  │  Graph  │  │   Add-on for  │  │
-│  │  Sign-in Logs │──┼───API───┼─▶│  Microsoft    │  │
-│  │               │  │         │  │  Office 365   │  │
-│  └───────────────┘  │         │  └───────────────┘  │
-│                     │         │         │           │
-│  ┌───────────────┐  │         │         ▼           │
-│  │     App       │  │         │  ┌───────────────┐  │
-│  │ Registration  │  │         │  │  SPL Detection│  │
-│  │ (OAuth 2.0)   │  │         │  │  Rules (13)   │  │
-│  └───────────────┘  │         │  └───────────────┘  │
-│                     │         │         │           │
-└─────────────────────┘         │         ▼           │
-                                │  ┌───────────────┐  │
-                                │  │   Security    │  │
-                                │  │   Dashboard   │  │
-                                │  └───────────────┘  │
-                                └─────────────────────┘
-```
 
 ---
 
