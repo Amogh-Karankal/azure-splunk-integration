@@ -11,7 +11,7 @@ Azure Entra ID security monitoring with Splunk Enterprise — ingesting sign-in 
 This project demonstrates cloud-to-SIEM integration by connecting Microsoft Azure Entra ID to Splunk Enterprise for real-time security monitoring and threat detection.
 
 ### Architecture
-![Architecture](screenshots/architecture.png)
+![Architecture](screenshots/azure-splunk-architecture.png)
 ```
 ┌─────────────────────┐         ┌─────────────────────┐
 │   Microsoft Azure   │         │  Splunk Enterprise  │
