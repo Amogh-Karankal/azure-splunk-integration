@@ -1,0 +1,10 @@
+# Detection 4: Login Summary by User
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Overview of success/failure counts per user for baseline analysis
+# Severity: Informational
+
+index=azure_logs
+| spath status.errorCode
+| eval Result=if('status.errorCode'==0, "Success", "Failed")
+| stats count by userDisplayName, Result
+| sort - count

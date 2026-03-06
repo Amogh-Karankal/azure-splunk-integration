@@ -1,0 +1,11 @@
+# Detection 3: Brute Force Followed by Success
+# MITRE ATT&CK: T1110 (Brute Force)
+# Description: Identifies successful login after multiple failed attempts - indicates credential compromise
+# Severity: Critical
+
+index=azure_logs
+| spath status.errorCode
+| eval Result=if('status.errorCode'==0, "Success", "Failed")
+| stats count(eval(Result="Failed")) as Failures, count(eval(Result="Success")) as Successes by userPrincipalName, ipAddress
+| where Failures > 2 AND Successes > 0
+| table userPrincipalName, ipAddress, Failures, Successes

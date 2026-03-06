@@ -1,0 +1,12 @@
+# Detection 8: Impossible Travel
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Detects logins from multiple countries for the same user - potential account compromise
+# Severity: High
+
+index=azure_logs
+| spath status.errorCode
+| spath location.countryOrRegion
+| where 'status.errorCode'=0
+| stats dc(location.countryOrRegion) as CountryCount, values(location.countryOrRegion) as Countries by userPrincipalName
+| where CountryCount > 1
+| table userPrincipalName, CountryCount, Countries

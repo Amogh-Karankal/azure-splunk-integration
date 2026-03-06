@@ -1,0 +1,9 @@
+# Detection 1: Failed Logins
+# MITRE ATT&CK: T1110 (Brute Force)
+# Description: Identifies all failed authentication attempts
+# Severity: Medium
+
+index=azure_logs
+| spath status.errorCode
+| where 'status.errorCode' != 0
+| table _time, userDisplayName, userPrincipalName, ipAddress, status.errorCode, status.failureReason

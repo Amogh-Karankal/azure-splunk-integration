@@ -1,0 +1,10 @@
+# Detection 9: Risky Sign-ins
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Identifies logins flagged as risky by Azure Identity Protection
+# Severity: High
+
+index=azure_logs
+| spath riskState
+| spath riskLevelDuringSignIn
+| where riskState!="none" OR riskLevelDuringSignIn!="none"
+| table _time, userDisplayName, ipAddress, riskState, riskLevelDuringSignIn

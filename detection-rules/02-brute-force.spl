@@ -1,0 +1,11 @@
+# Detection 2: Brute Force (Multiple Failures)
+# MITRE ATT&CK: T1110 (Brute Force)
+# Description: Identifies multiple failed login attempts per user/IP combination
+# Severity: High
+
+index=azure_logs
+| spath status.errorCode
+| where 'status.errorCode' != 0
+| stats count as FailedAttempts by userPrincipalName, ipAddress
+| where FailedAttempts > 2
+| sort - FailedAttempts

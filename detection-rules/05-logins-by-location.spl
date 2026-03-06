@@ -1,0 +1,9 @@
+# Detection 5: Logins by Location
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Geographic distribution of login activity for anomaly detection
+# Severity: Informational
+
+index=azure_logs
+| spath location.city
+| spath location.countryOrRegion
+| stats count by location.city, location.countryOrRegion

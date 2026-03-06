@@ -1,0 +1,10 @@
+# Detection 6: MFA Blocked/Required
+# MITRE ATT&CK: T1111 (Multi-Factor Authentication Interception)
+# Description: Identifies attempts blocked by MFA requirements
+# Severity: Medium
+
+index=azure_logs
+| spath status.errorCode
+| spath status.failureReason
+| where 'status.failureReason'="Strong Authentication is required."
+| table _time, userDisplayName, userPrincipalName, ipAddress, appDisplayName

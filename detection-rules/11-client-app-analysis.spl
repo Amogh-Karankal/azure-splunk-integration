@@ -1,0 +1,9 @@
+# Detection 11: Client App Analysis
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Identifies client applications used for authentication - detect legacy/risky apps
+# Severity: Informational
+
+index=azure_logs
+| spath clientAppUsed
+| stats count by clientAppUsed
+| sort - count

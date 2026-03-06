@@ -1,0 +1,12 @@
+# Detection 13: Failed Logins by Location
+# MITRE ATT&CK: T1110 (Brute Force)
+# Description: Geographic sources of failed login attempts to identify attack origins
+# Severity: Medium
+
+index=azure_logs
+| spath status.errorCode
+| spath location.city
+| spath location.countryOrRegion
+| where 'status.errorCode' != 0
+| stats count as FailedAttempts by location.city, location.countryOrRegion
+| sort - FailedAttempts

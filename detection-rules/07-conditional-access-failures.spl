@@ -1,0 +1,9 @@
+# Detection 7: Conditional Access Failures
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Identifies logins blocked by Conditional Access policies
+# Severity: Medium
+
+index=azure_logs
+| spath conditionalAccessStatus
+| where conditionalAccessStatus="failure"
+| table _time, userDisplayName, ipAddress, appDisplayName, conditionalAccessStatus

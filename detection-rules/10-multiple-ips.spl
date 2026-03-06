@@ -1,0 +1,11 @@
+# Detection 10: Multiple IPs per User
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Identifies users logging in from multiple IP addresses - potential credential sharing or compromise
+# Severity: Medium
+
+index=azure_logs
+| spath status.errorCode
+| where 'status.errorCode'=0
+| stats dc(ipAddress) as IPCount, values(ipAddress) as IPs by userPrincipalName
+| where IPCount > 2
+| table userPrincipalName, IPCount, IPs

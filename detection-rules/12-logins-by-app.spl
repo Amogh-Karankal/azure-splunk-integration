@@ -1,0 +1,9 @@
+# Detection 12: Logins by Application
+# MITRE ATT&CK: T1078 (Valid Accounts)
+# Description: Application usage patterns per user for baseline and anomaly detection
+# Severity: Informational
+
+index=azure_logs
+| spath appDisplayName
+| stats count by appDisplayName, userDisplayName
+| sort - count
